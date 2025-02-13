@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .  # Indique le répertoire racine de votre projet
+      dockerfile: web/Dockerfile
+    ports:
+      - "8081:8081"  # Le port de votre frontend
+    depends_on:
+      - backend  # Le frontend attend que l'API soit prête
+
+  backend:
+    build:
+      context: .  # Indique le répertoire racine de votre projet
+      dockerfile: api/Dockerfile
+    ports:
+      - "5000:5000"  # Le port de votre API
+    environment:
+      - NODE_ENV=production

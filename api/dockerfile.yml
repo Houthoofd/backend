@@ -1,0 +1,20 @@
+# Utiliser une image Node.js officielle pour le backend
+FROM node:18-alpine
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier package.json et package-lock.json (ou yarn.lock)
+COPY back/package*.json ./
+
+# Installer les dépendances
+RUN npm install --production
+
+# Copier le reste de l'application (les fichiers sources)
+COPY back/ .
+
+# Exposer le port que l'application backend va utiliser
+EXPOSE 5000
+
+# Démarrer l'API
+CMD ["npm", "start"]
