@@ -2,12 +2,9 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: web/Dockerfile
-    # Port exposé pour Nginx, pas pour le développement local
+      dockerfile: web/Dockerfile  # Dockerfile pour la construction du frontend
     ports:
-      - "5173:80"  # Il est possible de l'ajuster pour la prod, mais pour le dev c'est correct
-    depends_on:
-      - backend
+      - "3000:3000"
     networks:
       - clubmanager
 
@@ -19,18 +16,17 @@ services:
       - "5000:5000"
     environment:
       - NODE_ENV=production
-    volumes:
-      - ./api:/app  # Synchronisation des fichiers locaux avec le conteneur
     networks:
       - clubmanager
 
   nginx:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile  # Dockerfile pour la construction de Nginx
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf  # Fichier principal de configuration Nginx
-      - ./nginx/conf.d:/etc/nginx/conf.d  # Dossier pour les configurations supplémentaires
+      - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - "80:80"  # Serveur frontend via Nginx sur le port 80
+      - "80:80"
     depends_on:
       - frontend
       - backend

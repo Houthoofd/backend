@@ -1,21 +1,19 @@
-# Utiliser une image Node.js officielle légère (alpine)
+# Étape de construction (backend)
 FROM node:18-alpine
 
-# Définir le répertoire de travail
 WORKDIR /app
 
-# Copier uniquement les fichiers package.json et package-lock.json pour optimiser le cache Docker
+# Copier les fichiers package.json et package-lock.json
 COPY api/package*.json ./
 
-# Installer les dépendances (utiliser --only=production pour installer uniquement celles nécessaires en prod)
+# Installer les dépendances
 RUN npm install --only=production
 
-# Copier le reste des fichiers sources de l'application backend
+# Copier le reste des fichiers de l'API
 COPY api/ .
 
-# Exposer le port utilisé par votre API backend
+# Exposer le port de l'API
 EXPOSE 5000
 
-# Démarrer l'API
-CMD ["npm", "start"]
-
+# Lancer l'application Node.js
+CMD ["npm", "run", "start"]
