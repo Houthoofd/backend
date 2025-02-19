@@ -1,6 +1,9 @@
 # Ignore node_modules à la racine et dans tous les sous-dossiers
 node_modules/
 
+/*
+!/api
+
 # Logs
 logs
 *.log
