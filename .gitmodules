@@ -1,3 +1,6 @@
-[submodule "frontend"]
-	path = frontend
+[submodule "api"]
+    path = api
+    url = https://github.com/Houthoofd/backend.git
+[submodule "web"]
+	path = web
 	url = https://github.com/Houthoofd/frontend.git
