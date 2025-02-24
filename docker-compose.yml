@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: web/Dockerfile  # Dockerfile pour la construction du frontend
     ports:
-      - "3000:3000"
+      - "8081:8081"
     networks:
       - clubmanager
 
